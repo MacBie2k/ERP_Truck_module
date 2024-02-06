@@ -73,9 +73,9 @@ public class GetTruckDetailsEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("api/trucks/{id}", async (int truckId,  ISender sender) =>
+        app.MapGet("api/trucks/{id}", async (int id,  ISender sender) =>
         {
-            var query = new GetTruckDetails.Query() { TruckId = truckId};
+            var query = new GetTruckDetails.Query() { TruckId = id};
 
             var result = await sender.Send(query);
             if (result.IsFailure)

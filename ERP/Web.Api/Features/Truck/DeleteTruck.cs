@@ -63,9 +63,9 @@ public class DeleteTruckEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapDelete("api/trucks/{id}", async (int projectId, ISender sender) =>
+        app.MapDelete("api/trucks/{id}", async (int id, ISender sender) =>
         {
-            var command = new DeleteTruck.Command() { TruckId = projectId };
+            var command = new DeleteTruck.Command() { TruckId = id };
 
             var result = await sender.Send(command);
             if (result.IsFailure)

@@ -104,10 +104,10 @@ public class UpdateTruckEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPut("api/trucks/{id}", async (UpdateTruckRequest request, ISender sender) =>
+        app.MapPut("api/trucks/{id}", async (int id, UpdateTruckRequest request, ISender sender) =>
         {
             var command = request.Adapt<UpdateTruck.Command>();
-
+            command.TruckId = id;
             var result = await sender.Send(command);
             if (result.IsFailure)
                 return Results.BadRequest(result.Error);
